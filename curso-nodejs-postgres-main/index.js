@@ -1,3 +1,10 @@
+//npm instal pg
+//npm i @hapi/boom instalar boom
+//npm install joi instalar joi
+//npm i cors instalar cors
+//npm i express
+//npm install express
+
 const express = require('express');
 const cors = require('cors');
 const routerApi = require('./routes');
