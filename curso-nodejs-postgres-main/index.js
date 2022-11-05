@@ -5,6 +5,8 @@
 //npm i express
 //npm install express
 //npm i dotenv
+//npm install --save sequelize
+//npm install --save pg-hstore
 
 const express = require('express');
 const cors = require('cors');
