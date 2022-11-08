@@ -1,7 +1,7 @@
 const boom = require('@hapi/boom');
 const pool = require("../libs/postgres-pool")
 
-const getConnection = require("./../libs/postgres")
+const { models } = require("./../libs/sequelize")
 
 class UserService {
   constructor() {
@@ -14,13 +14,15 @@ class UserService {
   }
 
   async find() {
-    const query = "SELECT * FROM task"
-    const rta = await this.pool.query(query);
-    return rta.rows;
+    const rta = await models.User.findAll();
+    return rta
   }
 
   async findOne(id) {
-    return { id };
+    const user = await models.User.findOne({
+      where: { id: id },
+    });
+    return user;
   }
 
   async update(id, changes) {
@@ -31,7 +33,14 @@ class UserService {
   }
 
   async delete(id) {
-    return { id };
+    const user = await models.User.findOne({
+      where: { id: id },
+    });
+
+    await models.User.destroy({
+      where: { id: id },
+    });
+    return user
   }
 }
 
