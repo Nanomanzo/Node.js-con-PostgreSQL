@@ -33,14 +33,10 @@ class UserService {
   }
 
   async delete(id) {
-    const user = await models.User.findOne({
-      where: { id: id },
-    });
-
     await models.User.destroy({
       where: { id: id },
     });
-    return user
+    return models.User
   }
 }
 
