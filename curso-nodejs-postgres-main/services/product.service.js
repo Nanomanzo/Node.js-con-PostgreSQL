@@ -11,11 +11,7 @@ class ProductsService {
   }
 
   async create(data) {
-    const newProduct = {
-      id: faker.datatype.uuid(),
-      ...data
-    }
-    this.products.push(newProduct);
+    const newProduct = await models.Product.create(data)
     return newProduct;
   }
 
@@ -25,30 +21,23 @@ class ProductsService {
   }
 
   async findOne(id) {
-    const product = await models.Product.findOne({
-      where: { id: id },
-    });
+    const product = await models.Product.findByPk(id);
+    if (!product) {
+      throw boom.notFound("usuario no encontrado")
+    }
     return product;
   }
 
   async update(id, changes) {
-    const index = this.products.findIndex(item => item.id === id);
-    if (index === -1) {
-      throw boom.notFound('product not found');
-    }
-    const product = this.products[index];
-    this.products[index] = {
-      ...product,
-      ...changes
-    };
-    return this.products[index];
+    const product = await this.findOne(id);
+    const rta = await product.update(changes)
+    return rta
   }
 
   async delete(id) {
-    await models.Product.destroy({
-      where: { id: id },
-    });
-    return models.User
+    const product = await this.findOne(id);
+    await product.destroy();
+    return {product}
   }
 
 }

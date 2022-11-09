@@ -9,7 +9,7 @@ const ProductSchema = {
     primaryKey: true,
     type: DataTypes.INTEGER
   },
-  nombre: {
+  name: {
     allowNull: false,
     type: DataTypes.STRING,
     unique: false,

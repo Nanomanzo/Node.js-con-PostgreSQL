@@ -8,7 +8,6 @@ const image = Joi.string().uri();
 const createProductSchema = Joi.object({
   name: name.required(),
   price: price.required(),
-  image: image.required()
 });
 
 const updateProductSchema = Joi.object({
