@@ -7,8 +7,7 @@
 //npm i dotenv
 //npm install --save sequelize
 //npm install --save pg-hstore
-//docker-compose up -d mysql
-//docker-compose up -d phpmyadmin
+//npm i sequelize-cli --save-dev
 
 const express = require('express');
 const cors = require('cors');
